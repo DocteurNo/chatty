@@ -2,6 +2,7 @@
 
 namespace Chatty\Http\Controllers;
 
+use Auth;
 use Chatty\Models\User;
 use Illuminate\Http\Request;
 
@@ -31,5 +32,26 @@ class AuthController extends Controller
             ->with(
                 'info',
                 'Your account has been created and you can now sign in.');
+    }
+
+    public function getSignin()
+    {
+        return view('auth.signin');
+    }
+
+    public function postSignin(Request $request)
+    {
+        $this->validate($request,[
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+        if (!Auth::attempt(
+            $request->only(['email', 'password']),
+            $request->has('remember')
+        )) {
+            return redirect()->back()->with('info', 'Could not sign you in with those details.');
+        }
+        return redirect()->route('home')->with('info', 'You are now signed in.');
     }
 }

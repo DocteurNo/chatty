@@ -1,37 +1,33 @@
 @extends('templates.default')
 
 @section('content')
-    <h3>Sign up</h3>
-
     <div class="row">
         <div class="col-lg-6">
-            <form action="{{ route('auth.signup') }}" method="post" class="form-vertical">
+            <h3>Sign in</h3>
+            <form action="{{ route('auth.signin') }}" method="post" class="form-vertical">
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                    <label for="email" class="form-label">Your email address</label>
+                    <label for="email" class="form-label">Email</label>
                     <input type="text" name="email" id="email" class="form-control"
                            value="{{ Request::old('email') ?: '' }}">
                     @if($errors->has('email'))
                         <span class="help-block">{{ $errors->first('email') }}</span>
                     @endif
                 </div>
-                <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                    <label for="username" class="form-label">Choose your username</label>
-                    <input type="text" name="username" id="username" class="form-control"
-                           value="{{ Request::old('username') ?: '' }}">
-                    @if($errors->has('username'))
-                        <span class="help-block">{{ $errors->first('username') }}</span>
-                    @endif
-                </div>
                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                    <label for="password" class="form-label">Choose your password</label>
+                    <label for="password" class="form-label">Password</label>
                     <input type="password" name="password" id="password" class="form-control"
                            value="{{ Request::old('password') ?: '' }}">
                     @if($errors->has('password'))
-                        <span class="help-block">{{ $errors->first('username') }}</span>
+                        <span class="help-block">{{ $errors->first('password') }}</span>
                     @endif
                 </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="remember" id="remember"> Remember me
+                    </label>
+                </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-default">Sign up</button>
+                    <button type="submit" class="btn btn-default">Sign in</button>
                 </div>
                 <input type="hidden" name="_token" value="{{ Session::token() }}">
             </form>

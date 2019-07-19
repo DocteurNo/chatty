@@ -7,9 +7,9 @@
             @if(Auth::check())
                 <ul class="nav navbar-nav">
                     <li><a href="{{ route('home') }}">Timeline</a></li>
-                    <li><a href="{{ route('friend.index') }}">Friends</a></li>
+                    <li><a href="#">Friends</a></li>
                 </ul>
-                <form action="{{ route('search.results') }}" class="navbar-form navbar-left" role="search">
+                <form action="#" class="navbar-form navbar-left" role="search">
                     <div class="form-group">
                         <input type="text" name="query" class="form-control" placeholder="Find people">
                     </div>
@@ -18,12 +18,12 @@
             @endif
             <ul class="nav navbar-nav navbar-right">
                 @if(Auth::check())
-                    <li><a href="#">Dayle<!--Auth::user()->getNameOrUsername()--></a></li>
+                    <li><a href="#">{{ Auth::user()->getNameOrUsername() }}</a></li>
                     <li><a href="#">Update profile</a></li>
                     <li><a href="#">Sign out</a></li>
                 @else
                     <li><a href="{{ route('auth.signup') }}">Sign up</a></li>
-                    <li><a href="#">Sign in</a></li>
+                    <li><a href="{{ route('auth.signin') }}">Sign in</a></li>
                 @endif
             </ul>
         </div>
