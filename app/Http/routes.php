@@ -1,14 +1,24 @@
 <?php
 
 use Chatty\Http\Controllers\HomeController;
+use Chatty\Http\Controllers\AuthController;
 
+/**
+ * Home
+ */
 Route::get('/', [
     'uses' => 'HomeController@index',
     'as' => 'home',
 ]);
 
-Route::get('/alert', function () {
-    return redirect()
-        ->route('home')
-        ->with('info', 'You are signed up!');
-});
+/**
+ * Authentication
+ */
+Route::get('/signup', [
+    'uses' => 'AuthController@getSignup',
+    'as' => 'auth.signup',
+]);
+
+Route::post('/signup', [
+    'uses' => 'AuthController@postSignup',
+]);
